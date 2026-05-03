@@ -3,101 +3,95 @@ import Logo from "../../assets/website/logo.png";
 import { FaCartShopping } from "react-icons/fa6";
 import DarkMode from "./DarkMode";
 import { FaCaretDown } from "react-icons/fa";
+import { FaSearch } from "react-icons/fa";
 
 const Menu = [
-  {
-    id: 1,
-    name: "Home",
-    link: "/#",
-  },
-  {
-    id: 2,
-    name: "Best Seller",
-    link: "/#services",
-  },
+  { id: 1, name: "Home", link: "/#" },
+  { id: 2, name: "Best Seller", link: "/#services" },
 ];
 
 const DropdownLinks = [
-  {
-    name: "Trending Books",
-    link: "/#",
-  },
-  {
-    name: "Best Selling",
-    link: "/#",
-  },
-  {
-    name: "Authors",
-    link: "/#",
-  },
+  { name: "Trending Books", link: "/#" },
+  { name: "Best Selling", link: "/#" },
+  { name: "Authors", link: "/#" },
 ];
 
 const Navbar = ({ handleOrderPopup }) => {
   return (
-    <>
-      <div className="shadow-md bg-white dark:bg-gray-900 dark:text-white duration-200">
-        <div className="container py-3 sm:py-0">
-          <div className="flex justify-between items-center">
-            <div>
-              <a href="#" className="font-bold text-2xl sm:text-3xl flex gap-2">
-                <img src={Logo} alt="Logo" className="w-10" />
-                Books
-              </a>
-            </div>
-            <div className="flex justify-between items-center gap-4">
-              <div>
-                <DarkMode />
-              </div>
-              <ul className="hidden sm:flex items-center gap-4">
-                {Menu.map((menu) => (
-                  <li key={menu.id}>
-                    <a
-                      href={menu.link}
-                      className="inline-block py-4 px-4 hover:text-primary duration-200"
-                    >
-                      {menu.name}
-                    </a>
-                  </li>
-                ))}
-                {/* Simple Dropdown and Links */}
-                <li className="group relative cursor-pointer">
-                  <a
-                    href="/#home"
-                    className="flex h-[72px] items-center gap-[2px]"
-                  >
-                    Quick Links{" "}
-                    <span>
-                      <FaCaretDown className="transition-all duration-200 group-hover:rotate-180" />
-                    </span>
-                  </a>
-                  <div className="absolute -left-9 z-[9999] hidden w-[150px] rounded-md bg-white p-2 text-black group-hover:block  ">
-                    <ul className="space-y-3">
-                      {DropdownLinks.map((data) => (
-                        <li key={data.name}>
-                          <a
-                            className="inline-block w-full rounded-md p-2 hover:bg-primary/20"
-                            href={data.link}
-                          >
-                            {data.name}
-                          </a>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                </li>
-              </ul>
-              <button
-                onClick={() => handleOrderPopup()}
-                className="bg-gradient-to-r from-primary to-secondary hover:scale-105 duration-200 text-white py-1 px-4 rounded-full flex items-center gap-3"
-              >
-                Order
-                <FaCartShopping className="text-xl text-white drop-shadow-sm cursor-pointer" />
-              </button>
-            </div>
+    <div className="shadow-md bg-white dark:bg-gray-900 dark:text-white">
+      <div className="container py-3">
+        <div className="flex items-center justify-between gap-4">
+
+          {/* LEFT - LOGO */}
+          <div className="flex items-center gap-2">
+            <img src={Logo} alt="Logo" className="w-10" />
+            <span className="font-bold text-2xl">Books</span>
           </div>
+
+          {/* MIDDLE - MENU */}
+          <ul className="hidden sm:flex items-center gap-12 flex-1 justify-center ml-6">
+            {Menu.map((menu) => (
+              <li key={menu.id}>
+                <a
+                  href={menu.link}
+                  className="hover:text-primary transition-all duration-200 hover:scale-105 inline-block"
+                >
+                  {menu.name}
+                </a>
+              </li>
+            ))}
+
+            {/* Dropdown */}
+            <li className="group relative cursor-pointer">
+              <div className="flex items-center gap-1 hover:text-primary transition">
+                Quick Links <FaCaretDown className="group-hover:rotate-180 transition" />
+              </div>
+
+              <div className="absolute left-0 top-8 hidden group-hover:block bg-white dark:bg-gray-800 shadow-lg rounded-md p-2 w-[160px] z-50">
+                <ul className="space-y-2">
+                  {DropdownLinks.map((data) => (
+                    <li key={data.name}>
+                      <a
+                        href={data.link}
+                        className="block px-2 py-1 rounded hover:bg-primary/20 hover:scale-105 transition"
+                      >
+                        {data.name}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </li>
+          </ul>
+
+          {/* RIGHT - SEARCH + THEME + ORDER */}
+          <div className="flex items-center gap-3">
+
+            {/* SEARCH */}
+            <div className="hidden md:flex items-center border rounded-full px-3 py-1 bg-gray-100 dark:bg-gray-800 w-[220px]">
+              <FaSearch className="text-gray-500 text-sm mr-2" />
+              <input
+                type="text"
+                placeholder="Search books..."
+                className="bg-transparent outline-none text-sm w-full"
+              />
+            </div>
+
+            {/* DARK MODE */}
+            <DarkMode />
+
+            {/* ORDER BUTTON */}
+            <button
+              onClick={handleOrderPopup}
+              className="bg-gradient-to-r from-primary to-secondary hover:scale-105 transition text-white py-1 px-4 rounded-full flex items-center gap-2"
+            >
+              Order <FaCartShopping />
+            </button>
+          </div>
+
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

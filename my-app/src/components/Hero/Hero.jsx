@@ -1,4 +1,4 @@
-import React from "react";
+import { useState } from "react";
 import Book1 from "../../assets/books/book2.jpg";
 import Book2 from "../../assets/books/book1.jpg";
 import Book3 from "../../assets/books/book3.jpg";
@@ -10,115 +10,113 @@ const ImageList = [
     img: Book1,
     title: "His Life will forever be Changed",
     description:
-      "lorem His Life will forever be Changed dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "A powerful story of transformation and struggle where the main character discovers hidden truths about life, relationships, and purpose. Every page brings a new emotional turn that keeps the reader engaged.",
   },
   {
     id: 2,
     img: Book2,
     title: "Who's there",
     description:
-      "Who's there lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "A mysterious narrative that explores unknown voices, secrets, and unexpected encounters. The story builds curiosity with every chapter, making you question what is real and what is illusion.",
   },
   {
     id: 3,
     img: Book3,
     title: "Lost Boy",
     description:
-      "Lost Boy, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "An emotional journey of a boy trying to find his identity in a world full of confusion and challenges. It reflects growth, pain, and hope in a beautifully written storyline.",
   },
 ];
 
 const Hero = ({ handleOrderPopup }) => {
-  const [imageId, setImageId] = React.useState(Book1);
-  const [title, setTitle] = React.useState("His Life will forever be Changed");
-  const [description, setDescription] = React.useState(
-    "lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
-  );
+  const [active, setActive] = useState(ImageList[0]);
 
   const bgImage = {
     backgroundImage: `url(${Vector})`,
     backgroundPosition: "center",
     backgroundRepeat: "no-repeat",
     backgroundSize: "cover",
-    // height: "100%",
     width: "100%",
   };
 
   return (
-    <>
-      <div
-        className="min-h-[550px] sm:min-h-[650px] bg-gray-100 flex justify-center items-center dark:bg-gray-950 dark:text-white duration-200"
-        style={bgImage}
-      >
-        <div className="container pb-8 sm:pb-0">
-          <div className="grid grid-cols-1 sm:grid-cols-2">
-            {/* text content section */}
-            <div
-              data-aos-once="true"
-              className="flex flex-col justify-center gap-4 pt-12 sm:pt-0 text-center sm:text-left order-2 sm:order-1"
+    <div
+      className="min-h-[550px] sm:min-h-[650px] bg-gray-100 flex justify-center items-center dark:bg-gray-950 dark:text-white duration-200"
+      style={bgImage}
+    >
+      <div className="container pb-8 sm:pb-0">
+
+        <div className="grid grid-cols-1 sm:grid-cols-2">
+
+          {/* text section */}
+          <div
+            data-aos-once="true"
+            className="flex flex-col justify-center gap-4 pt-12 sm:pt-0 text-center sm:text-left order-2 sm:order-1"
+          >
+            <h1
+              data-aos="zoom-out"
+              data-aos-duration="500"
+              className="text-5xl sm:text-6xl lg:text-7xl font-bold"
             >
-              <h1
-                data-aos="zoom-out"
-                data-aos-duration="500"
-                data-aos-once="true"
-                className="text-5xl sm:text-6xl lg:text-7xl font-bold"
-              >
-                {title}
-                <p class="bg-clip-text text-transparent bg-gradient-to-b from-primary text-right text-sm to-secondary">
-                  by Anonymous
-                </p>{" "}
-              </h1>
-              <p
-                data-aos="slide-up"
-                data-aos-duration="500"
-                data-aos-delay="100"
-                className="text-sm "
-              >
-                {description}
+              {active.title}
+
+              <p className="bg-clip-text text-transparent bg-gradient-to-b from-primary text-right text-sm to-secondary">
+                by Anonymous
               </p>
-              <div>
-                <button
-                  onClick={handleOrderPopup}
-                  className="bg-gradient-to-r from-primary to-secondary hover:scale-105 duration-200 text-white py-2 px-4 rounded-full"
-                >
-                  Order Now
-                </button>
-              </div>
-            </div>
-            {/* Image section */}
-            <div className="min-h-[450px] sm:min-h-[450px] flex justify-center items-center relative order-1 sm:order-2 ">
-              <div className="h-[300px] sm:h-[450px] overflow-hidden flex justify-center items-center">
-                <img
-                  data-aos="zoom-in"
-                  data-aos-once="true"
-                  src={imageId}
-                  alt="biryani img"
-                  className="w-[300px] h-[300px] sm:h-[450px] sm:w-[450px] sm:scale-125 object-contain mx-auto"
-                />
-              </div>
-              <div className="flex lg:flex-col lg:top-1/2 lg:-translate-y-1/2 lg:py-2 justify-center gap-4 absolute -bottom-[40px] lg:-right-1 bg-white rounded-full">
-                {ImageList.map((item) => (
-                  <img
-                    data-aos="zoom-in"
-                    data-aos-once="true"
-                    src={item.img}
-                    onClick={() => {
-                      setImageId(
-                        item.id === 1 ? Book1 : item.id === 2 ? Book2 : Book3
-                      );
-                      setTitle(item.title);
-                      setDescription(item.description);
-                    }}
-                    alt="biryani img"
-                    className="max-w-[100px] h-[100px] object-contain inline-block hover:scale-110 duration-200"
-                  />
-                ))}
-              </div>
+            </h1>
+
+            <p
+              data-aos="slide-up"
+              data-aos-duration="500"
+              data-aos-delay="100"
+              className="text-sm"
+            >
+              {active.description}
+            </p>
+
+            <div>
+              <button
+                onClick={handleOrderPopup}
+                className="bg-gradient-to-r from-primary to-secondary hover:scale-105 duration-200 text-white py-2 px-4 rounded-full"
+              >
+                Order Now
+              </button>
             </div>
           </div>
+
+          {/* image section */}
+          <div className="min-h-[450px] flex justify-center items-center relative order-1 sm:order-2">
+
+            <div className="h-[300px] sm:h-[450px] overflow-hidden flex justify-center items-center">
+              <img
+                data-aos="zoom-in"
+                src={active.img}
+                alt={active.title}
+                className="w-[300px] h-[300px] sm:h-[450px] sm:w-[450px] sm:scale-125 object-contain mx-auto"
+              />
+            </div>
+
+            {/* thumbnails */}
+            <div className="flex lg:flex-col lg:top-1/2 lg:-translate-y-1/2 lg:py-2 justify-center gap-4 absolute -bottom-[40px] lg:-right-1 bg-white rounded-full">
+
+              {ImageList.map((item) => (
+                <img
+                  key={item.id}
+                  src={item.img}
+                  alt={item.title}
+                  onClick={() => setActive(item)}
+                  className="max-w-[100px] h-[100px] object-contain inline-block hover:scale-110 duration-200 cursor-pointer"
+                />
+              ))}
+
+            </div>
+
+          </div>
+
         </div>
+
       </div>
-    </>
+    </div>
   );
 };
 

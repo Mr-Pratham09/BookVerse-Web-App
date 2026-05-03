@@ -1,11 +1,13 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import darkPng from "../../assets/website/dark-mode-button.png";
 import lightPng from "../../assets/website/light-mode-button.png";
+import { FaSun, FaMoon } from "react-icons/fa";
 
 const DarkMode = () => {
   const [theme, setTheme] = useState(
-    localStorage.getItem("theme") ? localStorage.getItem("theme") : "light"
+    localStorage.getItem("theme") || "light"
   );
+
   const element = document.documentElement;
 
   useEffect(() => {
@@ -16,32 +18,25 @@ const DarkMode = () => {
       element.classList.remove("dark");
       localStorage.setItem("theme", "light");
     }
-  }, [theme]);
+  }, [theme, element]);
+
+  const toggleTheme = () => {
+    setTheme((prev) => (prev === "dark" ? "light" : "dark"));
+  };
+
   return (
-    <>
-      <div className="relative ">
-        <img
-          // src={theme === "dark" ? darkPng : lightPng}
-          src={lightPng}
-          alt="dark"
-          onClick={() =>
-            setTheme((data) => (data === "dark" ? "light" : "dark"))
-          }
-          className={`w-12 cursor-pointer drop-shadow-[1px_1px_1px_rgba(0,0,0,0.1)] transition-all duration-300 absolute right-0 z-10  ${
-            theme === "dark" ? "opacity-0" : "opacity-100"
-          } `}
-        />
-        <img
-          src={darkPng}
-          alt="dark"
-          onClick={() =>
-            setTheme((data) => (data === "dark" ? "light" : "dark"))
-          }
-          className="w-12 cursor-pointer drop-shadow-[1px_1px_2px_rgba(0,0,0,0.5)] duration-300 "
-        />
-      </div>
-    </>
+    <div
+      onClick={toggleTheme}
+      className="cursor-pointer text-xl transition-all duration-300"
+    >
+      {theme === "dark" ? (
+        <FaSun className="text-yellow-400 hover:scale-110 transition" />
+      ) : (
+        <FaMoon className="text-gray-700 hover:scale-110 transition" />
+      )}
+    </div>
   );
 };
+
 
 export default DarkMode;

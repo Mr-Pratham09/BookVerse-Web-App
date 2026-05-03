@@ -1,4 +1,3 @@
-import React from "react";
 import Book1 from "../../assets/books/book1.jpg";
 import Book2 from "../../assets/books/book2.jpg";
 import Book3 from "../../assets/books/book3.jpg";
@@ -44,52 +43,57 @@ const booksData = [
 
 const Books = () => {
   return (
-    <>
-      <div className="mt-14 mb-12">
-        <div className="container">
-          {/* header */}
-          <div className="text-center mb-10 max-w-[600px] mx-auto">
-            <p className="text-sm bg-clip-text text-transparent bg-gradient-to-r from-primary to-secondary">
-              Top Books for you
-            </p>
-            <h1 className="text-3xl font-bold">Top Books</h1>
-            <p className="text-xs text-gray-400">
-              Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-              Perspiciatis delectus architecto error nesciunt,
-            </p>
-          </div>
+    <div className="mt-14 mb-12">
+      <div className="container">
 
-          {/* Body section */}
-          <div>
-            <div className="grid grid-cols-1 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 place-items-center gap-5">
-              {/* Card */}
-              {booksData.map(({ id, img, title, rating, author }) => (
-                <div key={id} className="div space-y-3">
-                  <img
-                    src={img}
-                    alt=""
-                    className="h-[220px] w-[150px] object-cover rounded-md "
-                  />
-                  <div>
-                    <h3 className="font-semibold">{title}</h3>
-                    <p className="text-sm text-gray-700">{author}</p>
-                    <div className="flex items-center gap-1">
-                      <FaStar className="text-yellow-500" />
-                      <span>{rating}</span>
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
-            <div className="flex justify-center">
-              <button className="text-center mt-10 cursor-pointer  bg-primary text-white py-1 px-5 rounded-md">
-                View All Books
-              </button>
-            </div>
-          </div>
+        {/* header */}
+        <div className="text-center mb-10 max-w-[600px] mx-auto">
+          <p className="text-sm bg-clip-text text-transparent bg-gradient-to-r from-primary to-secondary">
+            Top Books for you
+          </p>
+
+          <h1 className="text-3xl font-bold">Top Books</h1>
+
+          <p className="text-xs text-gray-400">
+            Explore the most loved books chosen by readers across different genres. From bestsellers to hidden gems, find your next great read here.
+          </p>
         </div>
+
+        {/* Body section */}
+        <div className="grid grid-cols-1 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 place-items-center gap-5">
+
+          {booksData.map(({ id, img, title, rating, author }) => (
+            <div key={id} className="space-y-3">
+
+              <img
+                src={img}
+                alt={title}
+                className="h-[220px] w-[150px] object-cover rounded-md"
+              />
+
+              <div>
+                <h3 className="font-semibold">{title}</h3>
+                <p className="text-sm text-gray-700">{author}</p>
+
+                <div className="flex items-center gap-1">
+                  <FaStar className="text-yellow-500" />
+                  <span>{rating}</span>
+                </div>
+              </div>
+
+            </div>
+          ))}
+
+        </div>
+
+        <div className="flex justify-center">
+          <button className="text-center mt-10 cursor-pointer bg-primary text-white py-1 px-5 rounded-md transition-transform duration-200 hover:scale-105 hover:bg-primary/90">
+            View All Books
+          </button>
+        </div>
+
       </div>
-    </>
+    </div>
   );
 };
 

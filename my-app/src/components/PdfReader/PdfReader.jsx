@@ -1,13 +1,13 @@
-import React from "react";
 import book1 from "../../assets/pdf/pdf1.pdf";
 
 const PdfReader = () => {
   return (
-    <div className="container py-10">
+    <div className="container py-10 flex justify-center">
       <iframe
         src={book1}
-        className="w-full sm:w-[70%] mx-auto h-[500px]"
-      ></iframe>{" "}
+        title="PDF Viewer"
+        className="w-full sm:w-[70%] h-[500px] rounded-md shadow-md"
+      />
     </div>
   );
 };
